@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Entry Title"
+                tools:text="Entry Title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintStart_toStartOf="@+id/txt_time"
                 app:layout_constraintTop_toBottomOf="@+id/txt_time" />
@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginTop="8dp"
                 android:lineSpacingMultiplier="1.2"
                 android:maxLines="1"
@@ -65,7 +66,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/txt_title"
                 app:layout_constraintTop_toBottomOf="@+id/txt_title"
-                tools:text="I'll be in ads. would some blablabla" />
+                tools:text="Some description text goes here" />
 
             <ImageView
                 android:id="@+id/img_tag"
