@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="googleRed">#DB4437</color>
+    <color name="colorLime">#CDDC39</color>
+    <color name="colorCyan">#00BCD4</color>
+    <color name="tag_business">#607D8B</color>
 </resources>

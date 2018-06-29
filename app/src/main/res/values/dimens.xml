@@ -5,4 +5,16 @@
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
+
+    <!-- Cards -->
+    <dimen name="material_component_cards_primary_title_top_padding">24dp</dimen>
+    <dimen name="material_component_cards_primary_title_bottom_padding">16dp</dimen>
+    <dimen name="material_component_cards_action_button_row_padding">8dp</dimen>
+    <dimen name="material_component_cards_supporting_text_top_padding">16dp</dimen>
+    <dimen name="material_component_cards_supporting_text_bottom_padding">24dp</dimen>
+    <dimen name="material_component_cards_left_and_right_padding">16dp</dimen>
+    <dimen name="material_component_cards_top_and_bottom_padding">16dp</dimen>
+    <dimen name="material_component_cards_padding_from_edge_of_screen_to_card">8dp</dimen>
+    <dimen name="material_component_cards_space_between_cards">8dp</dimen>
+
 </resources>
