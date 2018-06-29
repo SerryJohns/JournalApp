@@ -60,6 +60,14 @@
             android:drawableStart="@drawable/google_plus">
         </Button>
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
 </FrameLayout>
