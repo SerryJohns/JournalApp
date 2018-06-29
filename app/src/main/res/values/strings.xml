@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JournalApp</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="journal_app">Journal App</string>
+    <string name="journal_desc">Pen down your thoughts and feelings</string>
+    <string name="login_with_google">Login with Google</string>
 </resources>
