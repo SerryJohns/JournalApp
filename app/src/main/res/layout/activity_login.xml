@@ -57,11 +57,9 @@
             android:background="@drawable/round_corner_button"
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
-
             android:drawableStart="@drawable/google_plus">
         </Button>
 
     </LinearLayout>
-
 
 </FrameLayout>
