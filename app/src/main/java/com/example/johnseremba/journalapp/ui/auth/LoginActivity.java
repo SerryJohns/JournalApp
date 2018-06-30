@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         if (account != null) {
             Intent homeActivityIntent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(homeActivityIntent);
+            finish();
         }
     }
 }
