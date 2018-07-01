@@ -1,9 +1,7 @@
-package com.example.johnseremba.journalapp.ui.dashboard;
+package com.example.johnseremba.journalapp.data;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
-
-import com.example.johnseremba.journalapp.data.AppDatabase;
 
 public class JournalDatabase {
 

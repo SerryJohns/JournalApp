@@ -1,9 +1,12 @@
 package com.example.johnseremba.journalapp.ui.dashboard;
 
-import android.arch.persistence.room.Room;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,10 +23,14 @@ import android.widget.TextView;
 
 import com.example.johnseremba.journalapp.R;
 import com.example.johnseremba.journalapp.data.AppDatabase;
+import com.example.johnseremba.journalapp.data.Entry;
+import com.example.johnseremba.journalapp.data.JournalDatabase;
 import com.example.johnseremba.journalapp.ui.auth.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +40,10 @@ public class MainActivity extends AppCompatActivity
     private TextView userName;
     private TextView userEmail;
     private FirebaseUser mCurrentUser;
+
+    private MainActivityViewModel mViewModel;
+    private List<Entry> mEntries;
+    private AppDatabase mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +79,33 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        mAuth = FirebaseAuth.getInstance();
+        mDatabase = JournalDatabase.getInstance(getApplicationContext());
+        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        mViewModel.getEntries().observe(this, new Observer<List<Entry>>() {
+            @Override
+            public void onChanged(@Nullable List<Entry> entries) {
+                // Do something with the data
+                if (entries != null) {
+                    Log.d("Room data", entries.toString());
+                }
+            }
+        });
+        new GetEntries().execute();
+    }
+
+    private class GetEntries extends AsyncTask<Void, Void, Void> {
+        List<Entry> mylist;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mylist = mDatabase.entryDao().getAll();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mViewModel.setEntries(mylist);
+        }
     }
 
     private void initializeUserProfile() {
