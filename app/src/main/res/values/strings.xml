@@ -16,4 +16,6 @@
     <string name="no_content">No Content</string>
     <string name="entry_title">Entry Title</string>
     <string name="log_out">Log out</string>
+    <string name="btn_submit">Submit</string>
+    <string name="description">Description</string>
 </resources>

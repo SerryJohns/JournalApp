@@ -14,6 +14,7 @@
         android:minHeight="100dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:layout_marginTop="@dimen/material_component_cards_space_between_cards"
         tools:layout_editor_absoluteY="8dp">
 
         <android.support.constraint.ConstraintLayout
@@ -61,7 +62,6 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="8dp"
                 android:lineSpacingMultiplier="1.2"
-                android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/txt_title"

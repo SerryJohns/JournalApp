@@ -13,6 +13,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +33,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
@@ -39,11 +44,14 @@ public class MainActivity extends AppCompatActivity
     private ImageView profilePic;
     private TextView userName;
     private TextView userEmail;
-    private FirebaseUser mCurrentUser;
+    private RecyclerView mRecyclerView;
+    private EntriesAdapter mEntriesAdapter;
+    private int mEntriesCount = 0;
 
+    private FirebaseUser mCurrentUser;
     private MainActivityViewModel mViewModel;
-    private List<Entry> mEntries;
     private AppDatabase mDatabase;
+    private TextView noContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +68,21 @@ public class MainActivity extends AppCompatActivity
         profilePic = (ImageView) header.findViewById(R.id.img_profile);
         userName = (TextView) header.findViewById(R.id.txt_name);
         userEmail = (TextView) header.findViewById(R.id.txt_email);
+
+        noContent = (TextView) findViewById(R.id.txt_no_content);
+        mRecyclerView = (RecyclerView) findViewById(R.id.entries_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        List<Entry> dummyEntries = new ArrayList<Entry>(){{
+            add(new Entry("Watch a Movie", "Today I'm planning to go out and watch a movie", "Entertainment", new Date().getTime()));
+            add(new Entry("Go Swimming", "I'm going to go swimming one of these days", "Other", new Date().getTime()));
+            add(new Entry("Lean new stuff", "Identify some new languages to learn", "Business", new Date().getTime()));
+        }};
+        mEntriesCount = dummyEntries.size();
+
+        mEntriesAdapter = new EntriesAdapter(dummyEntries);
+        mRecyclerView.setAdapter(mEntriesAdapter);
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
@@ -86,11 +109,22 @@ public class MainActivity extends AppCompatActivity
             public void onChanged(@Nullable List<Entry> entries) {
                 // Do something with the data
                 if (entries != null) {
-                    Log.d("Room data", entries.toString());
+                    mEntriesCount = entries.size();
+                    toggleNoContentVisibility();
+                    mEntriesAdapter.setEntries(entries);
                 }
             }
         });
         new GetEntries().execute();
+        mEntriesAdapter.notifyDataSetChanged();
+    }
+
+    private void toggleNoContentVisibility() {
+        if (mEntriesCount > 0) {
+            noContent.setVisibility(View.GONE);
+        } else {
+            noContent.setVisibility(View.VISIBLE);
+        }
     }
 
     private class GetEntries extends AsyncTask<Void, Void, Void> {
